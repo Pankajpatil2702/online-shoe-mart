@@ -1,0 +1,25 @@
+<div class="row pt-5">
+    <h4>Product Details of {{product.title}}</h4>
+<hr>    
+    <div class="col-lg-5">
+        <img src="{{product.image}}" alt="" class="img-fluid" width="300">
+    </div>
+    <div class="col-lg-7 p-4">
+        <h4>{{product.title}}</h4>
+        <p>{{product.category}}</p>
+
+        <br><br>
+        <p>{{product.price}} /-</p>
+        <br><br>
+
+        <p>{{product.description}}</p>
+
+        <div>
+            <button (click)="remove()"> - </button>
+            <input type="number" value="1" [(ngModel)]="qty">
+            <button (click)="add()"> + </button>
+        </div>
+        <br>
+        <button class="btn btn-primary" (click)="addToCart()">Add To Cart</button>
+    </div>
+</div>
