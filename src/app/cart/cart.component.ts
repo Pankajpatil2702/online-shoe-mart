@@ -1,46 +1,73 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
-export class CartComponent {
+export class CartComponent implements OnInit{
+  
+  cartProducts:any = [];
+  total:number = 0;
 
-  cartItems = [
-    {
-      id: 1,
-      name: 'Running Shoes',
-      price: 2999,
-      quantity: 1,
-      image: 'assets/images/productsFirst.jpg'
-    },
-    {
-      id: 2,
-      name: 'Casual Sneakers',
-      price: 3499,
-      quantity: 1,
-      image: 'assets/images/productsSecond.jpg'
+
+  ngOnInit(): void {
+
+    this.cartProducts = JSON.parse(localStorage.getItem("cart") || "[]");
+
+  }
+
+  increaseQty(index:number){
+
+    this.cartProducts[index].qty++;
+
+    this.updateCart();
+
+  }
+
+  decreaseQty(index:number){
+
+    if(this.cartProducts[index].qty > 1){
+      this.cartProducts[index].qty--;
     }
-  ];
 
-  increaseQty(item: any) {
-    item.quantity++;
+    this.updateCart();
+
   }
 
-  decreaseQty(item: any) {
-    if (item.quantity > 1) {
-      item.quantity--;
-    }
+  deleteProduct(index:number){
+
+    this.cartProducts.splice(index,1);
+
+    localStorage.setItem("cart",JSON.stringify(this.cartProducts));
+
+    alert("Product removed from cart!");
+
+    this.calculateTotal();
+ 
   }
 
-  removeItem(item: any) {
-    this.cartItems = this.cartItems.filter(p => p.id !== item.id);
+  updateCart(){
+
+    localStorage.setItem("cart",JSON.stringify(this.cartProducts));
+
+    this.calculateTotal();
+
   }
 
-  getTotal() {
-    return this.cartItems.reduce((total, item) =>
-      total + (item.price * item.quantity), 0);
+  calculateTotal(){
+
+    this.total = 0;
+
+    this.cartProducts.forEach((item:any)=>{
+
+      this.total += item.price * item.qty;
+
+    });
+
   }
+
+ 
+  
 
 }

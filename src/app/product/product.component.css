@@ -1,0 +1,29 @@
+.product-card{
+    background: linear-gradient(135deg,#fdfbfb,#ebedee);
+    border-radius: 15px;
+}
+
+.product-img{
+    max-height: 350px;
+    object-fit: contain;
+}
+
+.qty-box{
+    display: flex;
+    align-items: center;
+}
+
+.qty-input{
+    width: 70px;
+}
+
+.add-cart-btn{
+    background: linear-gradient(45deg,#007bff,#6610f2);
+    border: none;
+    transition: 0.3s;
+}
+
+.add-cart-btn:hover{
+    transform: scale(1.05);
+    background: linear-gradient(45deg,#6610f2,#007bff);
+}

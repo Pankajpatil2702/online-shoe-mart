@@ -1,18 +1,39 @@
-<h2 >Products List</h2>
+<h2 class="text-center text-primary fw-bold mt-4">Products List</h2>
 <hr>
-<div class="row">
 
-    <div class="col-lg-3" *ngFor="let product of products">
-        <a href="/product/{{product.id}}">
-            <div class="card" style="height: 380px; margin: 5px;">
-                <img src="{{product.image}}" alt="{{product.title}}" class="card-img-top" height="260">
-                <div class="card-body">
-                    <h5 class="card-title">{{product.title}}</h5>
-                    <p class="card-text">
-                        {{product.price}} - {{product.mrp}}
-                    </p>
-                </div>
-            </div>
-        </a>
+<div class="container">
+  <div class="row">
+
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-4" *ngFor="let product of products">
+
+      <a [routerLink]="['/product', product.id]" class="text-decoration-none">
+
+        <div class="card product-card">
+
+          <img [src]="product.image"
+               [alt]="product.title"
+               class="card-img-top product-img">
+
+          <div class="card-body text-center">
+
+            <h6 class="card-title product-title">
+              {{product.title}}
+            </h6>
+
+            <p class="card-text price">
+              ₹ {{product.price}}
+              <span class="text-muted text-decoration-line-through">
+                {{product.mrp}}
+              </span>
+            </p>
+
+          </div>
+
+        </div>
+
+      </a>
+
     </div>
+
+  </div>
 </div>

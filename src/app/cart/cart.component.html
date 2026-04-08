@@ -1,49 +1,69 @@
-<div class="container py-5">
-  <h2 class="text-center mb-4">Your Cart 🛒</h2>
+<div class="container mt-4">
 
-  <div *ngIf="cartItems.length === 0" class="text-center">
-    <h4>Your cart is empty</h4>
-  </div>
+<h2>My Cart</h2>
 
-  <div *ngFor="let item of cartItems" class="card mb-3 shadow">
-    <div class="row g-0 align-items-center">
+<table class="table table-bordered text-center">
 
-      <div class="col-md-3">
-        <img [src]="item.image" class="img-fluid rounded-start" alt="Product">
-      </div>
+<thead>
 
-      <div class="col-md-6">
-        <div class="card-body">
-          <h5>{{ item.name }}</h5>
-          <p class="text-primary">₹{{ item.price }}</p>
+<tr>
+<th>Image</th>
+<th>Title</th>
+<th>Price</th>
+<th>Quantity</th>
+<th>Total</th>
+<th>Action</th>
+</tr>
 
-          <div class="d-flex align-items-center">
-            <button class="btn btn-outline-dark btn-sm me-2"
-                    (click)="decreaseQty(item)">-</button>
+</thead>
 
-            <span>{{ item.quantity }}</span>
+<tbody>
 
-            <button class="btn btn-outline-dark btn-sm ms-2"
-                    (click)="increaseQty(item)">+</button>
-          </div>
-        </div>
-      </div>
+<tr *ngFor="let item of cartProducts; let i=index">
 
-      <div class="col-md-3 text-center">
-        <h5>₹{{ item.price * item.quantity }}</h5>
-        <button class="btn btn-danger btn-sm"
-                (click)="removeItem(item)">
-          Remove
-        </button>
-      </div>
+<td>
+<img [src]="item.image" width="60">
+</td>
 
-    </div>
-  </div>
+<td >{{item.title}}</td>
 
-  <!-- Total Section -->
-  <div *ngIf="cartItems.length > 0" class="text-end mt-4">
-    <h4>Total: ₹{{ getTotal() }}</h4>
-    <button class="btn btn-success mt-2">Proceed to Checkout</button>
-  </div>
+<td>₹ {{item.price}}</td>
+
+<td>
+
+<button class="btn btn-danger btn-sm"
+(click)="decreaseQty(i)">-</button>
+
+<span class="mx-2">{{item.qty}}</span>
+
+<button class="btn btn-success btn-sm"
+(click)="increaseQty(i)">+</button>
+
+</td>
+
+<td>
+₹ {{item.price * item.qty}}
+</td>
+
+<td>
+
+<button class="btn btn-danger"
+(click)="deleteProduct(i)">
+Delete
+</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+<h3 class="text-end">
+
+ Total : ₹ {{total}}
+
+</h3>
 
 </div>
